@@ -20,6 +20,10 @@ namespace BulkyBook.DataAccess.Repository
             _db = db;
         }
 
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
 
         public void Update(Category obj)
         {
