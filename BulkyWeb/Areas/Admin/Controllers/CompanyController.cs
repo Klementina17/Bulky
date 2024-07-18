@@ -21,8 +21,8 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             //prikaz na kompanii
-            List<Company> companies = _unitOfWork.Company.GetAll().ToList();
-            return View();
+            List<Company> objCompanyyList = _unitOfWork.Company.GetAll().ToList();
+            return View(objCompanyyList);
         }
 
         public IActionResult Upsert(int? id)

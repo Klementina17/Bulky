@@ -16,7 +16,8 @@ namespace BulkyBook.DataAccess.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers {get; set;}
-        public DbSet<Company> Company { get; set; }
+        
+        public DbSet<Company> Companies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,7 +31,6 @@ namespace BulkyBook.DataAccess.Data
                 new Category { Id = 4, Name = "Test", DisplayOrder = 4 }
 
             );
-
             modelBuilder.Entity<Company>().HasData(
                new Company
                {
