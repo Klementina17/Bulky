@@ -50,14 +50,17 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
 
             if (cardFromDb != null)
             {
+                //shopping cart exist
                 cardFromDb.Count += shoppingCart.Count;
                 _unitOfWork.ShoppingCart.Update(cardFromDb);
             }
             else
             {
+                //add cart record
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
             }
             _unitOfWork.Save();
+            TempData["success"] = "Cart updated successfuly.";
 
             return RedirectToAction(nameof(Index));
         }
