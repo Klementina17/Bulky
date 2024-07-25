@@ -127,6 +127,7 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
 			if (applicationUser.CompanyId.GetValueOrDefault() == 0)
             {
                 //it is a regular customer account and we need to capture payment
+                //stripe
 
             }
             return RedirectToAction(nameof(OrderConfirmation),new {id=ShoppingCartVM.OrderHeader.Id});

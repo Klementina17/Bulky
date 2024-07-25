@@ -10,6 +10,7 @@ using System.Security.Claims;
 namespace BulkyBookWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class OrderController : Controller
     {
         [BindProperty]
@@ -66,6 +67,16 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
         }
 
+        [HttpPost]
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+        public IActionResult StartProcessing()
+        {
+            _unitOfWork.OrderHeader.UpdateStatus(OrderVM.OrderHeader.Id, SD.StatusInProcess);
+            _unitOfWork.Save();
+            TempData["success"] = "Order Details Updated Successfully";
+            return RedirectToAction(nameof(Details), new { orderId = OrderVM.OrderHeader.Id });
+        }
+
         #region API CALLS
         [HttpGet]
         public IActionResult GetAll(string status)
@@ -84,7 +95,8 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                 var claimsIdentity = (ClaimsIdentity)User.Identity;
                 var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-                objOrderHeaders = _unitOfWork.OrderHeader.GetAll(u=>u.ApplicationUser.Id==userId,includeProperties: "ApplicationUser").ToList();
+                objOrderHeaders = _unitOfWork.OrderHeader
+                    .GetAll(u=>u.ApplicationUser.Id==userId,includeProperties: "ApplicationUser").ToList();
             }
 
             switch (status)
