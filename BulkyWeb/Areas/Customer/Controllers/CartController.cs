@@ -95,7 +95,7 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
                 ShoppingCartVM.OrderHeader.OrderTotal += (cart.Price * cart.Count);
             }
 
-            if (applicationUser.CompanyId.GetValueOrDefault() == 0)
+            if (applicationUser.CompanyId.GetValueOrDefault()==0)
             {
                 //it is a regular customer 
                 ShoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusPending;

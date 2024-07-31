@@ -240,7 +240,7 @@
                             }
                             @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
                             {
-                                @if (Model.OrderHeader.OrderStatus == SD.PaymentStatusPending)
+                                @if (Model.OrderHeader.OrderStatus == SD.StatusApproved)
                                 {
                                     <button type="submit" asp-action="StartProcessing"
                                             class="btn btn-primary form-control my-1">
